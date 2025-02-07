@@ -12,6 +12,7 @@ public class StackTests {
 
     /**
      * 数组的基本操作
+     * 数组主要适用于 随机访问/排序和搜索/查找表/作为其他数据结构的实现
      */
     @Test
     void studyArry() {
@@ -62,10 +63,8 @@ public class StackTests {
             ints2[k] = ints3[j];
         }
         System.out.println("倒序后新数组3为：" + Arrays.toString(ints2));
-
-
-
     }
+    
 
     /**
      * 栈的基本操作
