@@ -3,8 +3,7 @@ package com.yuan.suanfa;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootTest
@@ -64,7 +63,7 @@ public class StackTests {
         }
         System.out.println("倒序后新数组3为：" + Arrays.toString(ints2));
     }
-    
+
 
     /**
      * 栈的基本操作
@@ -93,4 +92,21 @@ public class StackTests {
         System.out.println("栈是否为空：" + empty);
     }
 
+    @Test
+    void aaa(){
+        int[] intArray = {1, 3, -1, -3, 5, 3, 6, 7};
+        int k = 3;
+        List<Integer> intList = Arrays.stream(intArray).boxed().toList();
+        int[] ints = new int[intList.size()- k + 1];
+        for (int i = 0; i < intList.size() - k + 1; i++) {
+            List<Integer> subList = intList.subList(i, i + k);
+            Integer max = Collections.max(subList);
+            System.out.println(subList);
+            System.out.println(max);
+            ints[i] = max;
+        }
+        System.out.println(Arrays.toString(ints));
+    }
+
 }
+
