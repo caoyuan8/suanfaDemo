@@ -1,4 +1,4 @@
-package com.yuan.test.controller;
+package com.yuan.suanfa.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

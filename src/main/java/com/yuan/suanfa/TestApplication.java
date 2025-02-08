@@ -1,4 +1,4 @@
-package com.yuan.test;
+package com.yuan.suanfa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
