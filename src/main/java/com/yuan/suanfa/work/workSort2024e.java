@@ -35,7 +35,7 @@ import java.util.Scanner;
 public class workSort2024e {
 
     public static void main(String[] args) {
-        Scanner scanner =new Scanner(System.in);
+        /*Scanner scanner =new Scanner(System.in);
         int n = scanner.nextInt();
         int[] h = new int[n];
         int[] w = new int[n];
@@ -60,7 +60,11 @@ public class workSort2024e {
         for (int i = 0; i < n; i++) {
             result.append(list[i][2]);
         }
-        System.out.println(result);
+        System.out.println(result);*/
+        String[] names = {"Mary","John","Emma"};
+        int[] heights = {180,165,170};
+        String[] strings = sortPeople(names, heights);
+        System.out.println(Arrays.toString(strings));
     }
 
     public String test1(){
@@ -90,6 +94,22 @@ public class workSort2024e {
             res.append(list[i][2]);
         }
         return res.toString();
+    }
+
+    public static String[] sortPeople(String[] names, int[] heights) {
+        String[][] list = new String[names.length][2];
+        for (int i = 0; i < names.length; i++) {
+            list[i][0] = (names[i]);
+            list[i][1] = String.valueOf(heights[i]);
+        }
+        Arrays.sort(
+                list,Comparator.comparing((String[] a)->a[1])
+        );
+        String[] result = new String[names.length];
+        for(int i = 0; i < names.length; i++){
+            result[i] = list[i][0];
+        }
+        return result;
     }
 
 
