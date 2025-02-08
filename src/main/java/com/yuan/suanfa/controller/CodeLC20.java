@@ -1,5 +1,10 @@
 package com.yuan.suanfa.controller;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class CodeLC20 {
@@ -43,7 +48,8 @@ public class CodeLC20 {
 
     public static void main(String[] args) {
 //        System.out.println(isValid("()[]{}"));
-        System.out.println(isValid("([])"));
+//        System.out.println(isValid("([])"));
+        System.out.println(isValid());;
     }
 
     public static boolean isValid(String s) {
@@ -81,6 +87,54 @@ public class CodeLC20 {
             }
         }
         return stack.isEmpty();
+    }
+
+    public static int isValid(){
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        Boolean ifError = false;
+        int result = 0;
+        int deepth = 0;
+        ArrayList<Character[]> characters = new ArrayList<>();
+        characters.add(new Character[]{'(',')'});
+        characters.add(new Character[]{'[',']'});
+        characters.add(new Character[]{'{','}'});
+        if(s.length()%2 == 1){
+            ifError =true;
+        }else {
+            ArrayList<Character> characters1 = new ArrayList<>();
+            for (char c : s.toCharArray()) {
+                if(c=='('||c=='['||c=='{'){
+                    characters1.add(c);
+                    deepth++;
+                    result = Math.max(result,deepth);
+                }else {
+                    if (CollectionUtils.isEmpty(characters1)){
+                        ifError =true;
+                        break;
+                    }
+                    //若栈不为空,则弹出栈顶并且深度减1
+                    Character remove = characters1.remove(characters1.size() - 1);
+                    deepth--;
+                    boolean isPair = false;
+                    for (Character[] character : characters) {
+                        if(remove==character[0]&&character[1]==c){
+                            isPair = true;
+                            break;
+                        }
+                    }
+                    if (!isPair) {
+                        ifError = true;
+                        break;
+                    }
+                }
+
+            }
+            if (!characters1.isEmpty()){
+                ifError = true;
+            }
+        }
+        return ifError?0:result;
     }
 
 
