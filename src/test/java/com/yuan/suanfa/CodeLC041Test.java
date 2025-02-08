@@ -1,6 +1,6 @@
 package com.yuan.suanfa;
 
-import com.yuan.suanfa.controller.CodeLC041;
+import com.yuan.suanfa.practice.CodeLC041;
 import org.junit.jupiter.api.Test;
 
 public class CodeLC041Test {

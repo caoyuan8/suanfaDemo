@@ -1,4 +1,4 @@
-package com.yuan.suanfa.controller;
+package com.yuan.suanfa.practice;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

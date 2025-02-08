@@ -1,6 +1,6 @@
 package com.yuan.suanfa;
 
-import com.yuan.suanfa.controller.CodeLC1603;
+import com.yuan.suanfa.practice.CodeLC1603;
 import org.junit.Test;
 
 public class CodeLC1603Test {

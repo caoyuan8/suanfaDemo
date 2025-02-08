@@ -1,9 +1,8 @@
-package com.yuan.suanfa.controller;
+package com.yuan.suanfa.practice;
 
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 import java.util.Stack;
 

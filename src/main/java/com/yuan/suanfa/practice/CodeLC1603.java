@@ -1,4 +1,4 @@
-package com.yuan.suanfa.controller;
+package com.yuan.suanfa.practice;
 
 /**
  * 1603. 设计停车系统
