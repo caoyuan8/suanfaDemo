@@ -32,7 +32,7 @@ import java.util.Scanner;
  * 132
  *
  */
-public class workSort2024e {
+public class Work2024EshengaotizhongSort {
 
     public static void main(String[] args) {
         Scanner scanner =new Scanner(System.in);
