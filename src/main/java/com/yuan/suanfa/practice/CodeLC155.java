@@ -1,5 +1,7 @@
 package com.yuan.suanfa.practice;
 
+import java.util.Stack;
+
 /**
  * LeetCode155、最小栈
  *
@@ -28,9 +30,41 @@ package com.yuan.suanfa.practice;
  */
 public class CodeLC155 {
 
+    Stack<Integer> stack;
+    Stack<Integer> minStack;
 
+    public CodeLC155() {
+        stack = new Stack<>();
+        minStack = new Stack<>();
+    }
 
+    public void push(int val) {
+        stack.push(val);
+        if(!minStack.isEmpty()){
+            Integer peek = minStack.peek();
+            if(val<=peek){
+                minStack.push(val);
+            }
+        }else {
+            minStack.push(val);
+        }
+    }
 
+    public void pop() {
+        Integer pop = stack.pop();
+        Integer peek = minStack.peek();
+        if(pop == peek){
+            minStack.pop();
+        }
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minStack.peek();
+    }
 
 
 
