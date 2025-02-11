@@ -87,4 +87,39 @@ public class Work2024DCPUsuanli {
         System.out.println(aAns+" "+bAns);
     }
 
+    public void test1(){
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int[] A = new int[a];
+        int[] B = new int[b];
+        for (int i = 0; i < a; i++) {
+            A[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < b; i++) {
+            B[i] = scanner.nextInt();
+        }
+        int sumA = 0;
+        for (int i : A) {
+            sumA += i;
+        }
+        int sumB = 0;
+        for (int i : B) {
+            sumB += i;
+        }
+        int avg = (sumA+sumB)/2;
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i : B) {
+            list.add(i);
+        }
+        int ansA = Integer.MAX_VALUE;
+        for (int i : A) {
+            if(list.contains(avg-sumA+i)){
+                ansA = Math.min(ansA,i);
+            }
+        }
+        int ansB = avg-sumA+ansA;
+        System.out.println(ansA+" "+ansB);
+    }
+
 }
