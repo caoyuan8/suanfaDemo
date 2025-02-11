@@ -31,6 +31,7 @@ import java.util.Set;
  */
 public class CodeLC349 {
 
+    //该题可以参考LC350
     public int[] intersection(int[] nums1, int[] nums2) {
         Set<Integer> set1 = new HashSet<Integer>();
         Set<Integer> set2 = new HashSet<Integer>();
