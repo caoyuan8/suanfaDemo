@@ -29,7 +29,13 @@ import java.util.Arrays;
  */
 public class CodeLC242 {
 
-    public boolean isAnagram(String s, String t) {
+    public static void main(String[] args) {
+/*        System.out.println(isAnagram("anagram","nagaram"));
+        System.out.println(isAnagram("rat","car"));*/
+        System.out.println(isAnagram1("anagram","nagaram"));
+        System.out.println(isAnagram1("rat","car"));
+    }
+    public static boolean isAnagram(String s, String t) {
         if(s.length()!=t.length()){
             return false;
         }
@@ -38,6 +44,31 @@ public class CodeLC242 {
         Arrays.sort(charArray);
         Arrays.sort(charArray1);
         return Arrays.equals(charArray,charArray1);
+    }
+
+    public static boolean isAnagram1(String s, String t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        //创建一个数组用来统计26个字母都出现了多少次 s中出现一次则+1 t中出现一次则-1
+        int[] table = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            table[c-'a']++;
+        }
+        for (int i = 0; i < t.length(); i++) {
+            char c = t.charAt(i);
+            table[c-'a']--;
+            /*if(table[c-'a']<0){
+                return false;
+            }*/
+        }
+        for (int i : table) {
+            if(i!=0){
+                return false;
+            }
+        }
+        return true;
     }
 
 }
