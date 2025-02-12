@@ -48,7 +48,7 @@ public class Work2024EJumpHouse1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        input = input.substring(1, input.length() - 1); // Remove square brackets
+        input = input.substring(1, input.length() - 1);
         String[] split = input.split(",");
 //        String[] split = scanner.nextLine().substring(1, scanner.nextLine().length() - 1).split(",");
         int[] nums = new int[split.length];
