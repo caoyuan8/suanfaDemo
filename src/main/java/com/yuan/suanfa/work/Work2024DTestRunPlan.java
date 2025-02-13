@@ -1,7 +1,7 @@
 package com.yuan.suanfa.work;
 
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *2024D-测试用例执行计划
@@ -70,9 +70,62 @@ import java.util.Scanner;
  */
 public class Work2024DTestRunPlan {
 
-    //TODO:暂时理解不了题意
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        // 输入特性个数N，测试用例个数M
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        // 构建一个哈希表，用于储存每一个特性的优先级
+        Map<Integer, Integer> dic = new HashMap<>();
+        // 输入N行，key为编号i，value为该特性的优先级
+        for (int i = 1; i <= N; i++) {
+            int priority = scanner.nextInt();
+            dic.put(i, priority);
+        }
+        scanner.nextLine(); // Consume newline character
+
+        // 构建答案哈希表
+        Map<Integer, Integer> ansDic = new HashMap<>();
+        // 输入M行
+        for (int i = 1; i <= M; i++) {
+            String line = scanner.nextLine();
+            Scanner lineScanner = new Scanner(line);
+
+            // 获得第i个测试用例对应的特性
+            List<Integer> nums = new ArrayList<>();
+            while (lineScanner.hasNextInt()) {
+                int num = lineScanner.nextInt();
+                nums.add(num);
+            }
+            // 将所有特性的优先级进行求和，得到用例i的特性
+            int sum = 0;
+            for (int num : nums) {
+                sum += dic.get(num);
+            }
+            ansDic.put(i, sum);
+
+            lineScanner.close();
+        }
+
+        // 对所有的id根据优先级大小进行排序，先按照优先级降序排序，优先级相同再按照id大小升序排序
+        List<Integer> ids = new ArrayList<>(ansDic.keySet());
+        Collections.sort(ids, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer a, Integer b) {
+                int diff = ansDic.get(b) - ansDic.get(a);
+                return diff != 0 ? Integer.compare(diff, 0) : Integer.compare(a, b);
+            }
+        });
+
+        // 然后逐行输出
+        for (int idx : ids) {
+            System.out.println(idx);
+        }
+
+        scanner.close();
     }
 
 
