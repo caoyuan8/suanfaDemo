@@ -4,3 +4,5 @@
 /out/
 #忽略所有的.imi文件
 *.imi
+#忽略所有的.class文件
+/target/
