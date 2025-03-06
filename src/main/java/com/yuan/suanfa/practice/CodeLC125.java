@@ -35,7 +35,7 @@ public class CodeLC125 {
     public static boolean isPalindrome(String s) {
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
-            if(Character.isDigit(c)||Character.isAlphabetic(c)){
+            if(Character.isAlphabetic(c)||Character.isDigit(c)){
                 sb.append(Character.toLowerCase(c));
             }
         }
@@ -46,6 +46,7 @@ public class CodeLC125 {
                 return false;
             }
             left++;
+            right--;
         }
         return true;
     }
