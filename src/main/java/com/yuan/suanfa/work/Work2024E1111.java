@@ -1,5 +1,9 @@
 package com.yuan.suanfa.work;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
 /**
  * 【双指针】2024E-双十一
  *
@@ -33,4 +37,40 @@ package com.yuan.suanfa.work;
  *
  */
 public class Work2024E1111 {
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        String[] split = s.split(",");
+        for (String string : split) {
+            list.add(Integer.parseInt(string));
+        }
+        int target = scanner.nextInt();
+        int ans = -1;
+        int n = list.size();
+        Collections.sort(list);
+        if(n < 3){
+            System.out.println(ans);
+        }
+        for (int i = 0; i < n; i++) {
+            if (list.get(i) + list.get(i + 1) + list.get(i + 2) > target) {
+                break;
+            }
+            int left = i + 1;
+            int right = n - 1;
+            while (left < right) {
+                int sum = list.get(i) + list.get(left) + list.get(right);
+                if (sum <= target) {
+                    ans = Math.max(ans, sum);
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+
+
 }
