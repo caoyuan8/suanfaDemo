@@ -50,10 +50,10 @@ public class Work2024E1111 {
         int ans = -1;
         int n = list.size();
         Collections.sort(list);
-        if(n < 3){
+/*        if(n < 3){
             System.out.println(ans);
-        }
-        for (int i = 0; i < n; i++) {
+        }*/
+        for (int i = 0; i < n-2; i++) {
             if (list.get(i) + list.get(i + 1) + list.get(i + 2) > target) {
                 break;
             }
