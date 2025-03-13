@@ -47,81 +47,44 @@ public class LC76 {
         System.out.println(minWindow("a", "aa"));
     }
 
-    public static String minWindow(String s, String t) {
-        // 定义结果字符串
-        String result = "";
-        // 定义长度
-        int sLength = s.length();
-        int tLength = t.length();
-        // 如果t的长度比s打，直接返回
-        if (tLength > sLength) {
-            return "";
-        }
-        // 如果s中包含t，直接返回
-        if (s.contains(t)) {
-            return t;
-        }
-        // 计算t的字母的数量
-        int[] tLetterCount = new int[58];
+    public static String minWindow(String S, String t) {
+        char[] s = S.toCharArray();
+        int m = s.length;
+        // 记录子串的左右端点
+        int ansLeft = -1;
+        int ansRight = m;
+        int[] cntS = new int[128]; // s 子串字母的出现次数
+        int[] cntT = new int[128]; // t 中字母的出现次数
         for (char c : t.toCharArray()) {
-            tLetterCount[c - 'A']++;
+            cntT[c]++;
         }
-        // 定义滑动窗口的左右指针（闭区间）
+
         int left = 0;
-        int right = t.length() - 1;
-        // 计算s第一个子串中，字母的数量
-        int[] subLetterCount = new int[58];
-        for (int i = left; i <= right; i++) {
-            char c = s.charAt(i);
-            subLetterCount[c - 'A']++;
-        }
-        // 统计最小子串长度
-        int minLength = Integer.MAX_VALUE;
-        // 记录最小字符串的左右端点
-        int resultLeft = 0;
-        int resultRight = 0;
-        // 开始滑动窗口
-        for (left = 0; left < sLength - tLength + 1; left++) {
-            // 当左端点开始向右滑动时，需要将 左端点移除字母的数量 减1
-            if (left > 0) {
-                // 找到移除的字母是什么
-                char c = s.charAt(left - 1);
-                // 数量-1
-                subLetterCount[c - 'A']--;
-            }
-            // 无论左端点是否移动，右端点都不重置
-            while (right < sLength) {
-                boolean flag = true;
-                // 遍历子串
-                for (int i = 0; i < subLetterCount.length; i++) {
-                    // 判断 子串的每个字母 的数量 是否小于 t 的对应字母数量
-                    if (subLetterCount[i] < tLetterCount[i]) {
-                        // 如果是，则直接返回，后面再执行 右端点向右移动1位
-                        flag = false;
-                        break;
-                    }
+        for (int right = 0; right < m; right++) { // 移动子串右端点
+            cntS[s[right]]++; // 右端点字母移入子串
+            while (isCovered(cntS, cntT)) { // 涵盖
+                if (right - left < ansRight - ansLeft) { // 找到更短的子串
+                    ansLeft = left; // 记录此时的左右端点
+                    ansRight = right;
                 }
-                if (flag) {
-                    // 如果子串的每个字母 的数量 都大于等于 t 的对应字母数量
-                    int temp = right - left;
-                    // 如果子串长度更小，记录最终结果的左右端点（比每次都获取子串速度更快）
-                    if (temp < minLength) {
-                        minLength = temp;
-                        resultLeft = left;
-                        resultRight = right;
-                    }
-                    break;
-                } else {
-                    // 如果子串的每个字母 的数量 存在小于 t 的对应字母数量，
-                    // 右端点向右移动1位（不超过数组边界），并且新增字母的数量+1
-                    right++;
-                    if (right < sLength) {
-                        subLetterCount[s.charAt(right) - 'A']++;
-                    }
-                }
+                cntS[s[left]]--; // 左端点字母移出子串
+                left++;
             }
         }
-        // 返回结果
-        return minLength == Integer.MAX_VALUE ? "" : s.substring(resultLeft, resultRight + 1);
+        return ansLeft < 0 ? "" : S.substring(ansLeft, ansRight + 1);
+    }
+
+    private static boolean isCovered(int[] cntS, int[] cntT) {
+        for (int i = 'A'; i <= 'Z'; i++) {
+            if (cntS[i] < cntT[i]) {
+                return false;
+            }
+        }
+        for (int i = 'a'; i <= 'z'; i++) {
+            if (cntS[i] < cntT[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
