@@ -14,50 +14,35 @@ public class C2024ELISPYunSuan {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
         List<String> ops = new ArrayList<>();
-        int i = 0;
-        int n = s.length();
-
-        // 遍历字符串，将其转化为方便操作的数组形式
-        while (i < n) {
-            char ch = s.charAt(i);
-            // 如果是数字或者负号，拼接数字
-            if (Character.isDigit(ch) || ch == '-') {
-                if (ops.isEmpty() || ops.get(ops.size() - 1).isEmpty()) {
-                    ops.add("");  // 新的数字开始
+        //(sub (mul 2 4) (div 9 3))
+        // 遍历字符串，逐个字符处理  转换成逆波兰表达式的形式
+        StringBuilder current = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == ')') {
+                // 如果当前有未处理的字符，先加入集合
+                if (current.length() > 0) {
+                    ops.add(current.toString());
+                    current.setLength(0); // 清空StringBuilder
                 }
-                ops.set(ops.size() - 1, ops.get(ops.size() - 1) + ch);  // 将数字添加到最后的字符串
-                i++;
-            }
-            // 如果是字母（操作符）
-            else if (Character.isLetter(ch)) {
-                ops.add(String.valueOf(ch));
-                i += 3;  // 跳过操作符和空格
-            }
-            // 如果是括号
-            else if (ch == '(' || ch == ')') {
-                ops.add(String.valueOf(ch));
-                i++;
-            }
-            // 如果是空格，表示数字即将开始，添加空字符串
-            else {
-                ops.add("");
-                i++;
-            }
-        }
-
-        // 删除ops中的空字符串
-        List<String> cleanedOps = new ArrayList<>();
-        for (String op : ops) {
-            if (!op.isEmpty()) {
-                cleanedOps.add(op);
+                // 将括号加入集合
+                ops.add(String.valueOf(c));
+            } else if (c == ' ') {
+                // 如果当前有未处理的字符，加入集合
+                if (current.length() > 0) {
+                    ops.add(current.toString());
+                    current.setLength(0); // 清空StringBuilder
+                }
+            } else {
+                // 将字符加入当前字符串
+                current.append(c);
             }
         }
 
         Stack<String> stack = new Stack<>();
         boolean isError = false;
 
-        // 遍历ops中的所有符号
-        for (String ch : cleanedOps) {
+        // 遍历ops中的所有符号  此操作类似于LC150逆波兰表达式求值
+        for (String ch : ops) {
             if (ch.equals("(") || Character.isLetter(ch.charAt(0))) {
                 // 遇到左括号或操作符，入栈
                 stack.push(ch);
